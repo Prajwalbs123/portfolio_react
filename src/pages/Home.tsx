@@ -1,5 +1,5 @@
-import React from 'react'
 import Profile from '../assets/images/profilepic.png'
+
 const Home = () => {
   return (
     <section className='flex '>
