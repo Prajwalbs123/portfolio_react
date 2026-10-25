@@ -1,8 +1,6 @@
 import {
-    car,
     contact,
     css,
-    estate,
     express,
     git,
     github,
@@ -14,14 +12,10 @@ import {
     mui,
     nextjs,
     nodejs,
-    pricewise,
     react,
     redux,
     sass,
-    snapgram,
-    summiz,
     tailwindcss,
-    threads,
     typescript,
 } from "../assets/icons";
 
@@ -125,4 +119,3 @@ export const socialLinks = [
         link: 'https://www.linkedin.com/in/prajwal-b-s-877a40202',
     }
 ];
-

@@ -1,27 +1,32 @@
+/* eslint react/no-unknown-property: "off" */
+
 import emailjs from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 
 import { Fox } from "../models";
 import useAlert from "../hooks/useAlert";
 import { Alert, Loader } from "../components";
 
 const Contact = () => {
-  const formRef = useRef();
+  const formRef = useRef<HTMLFormElement>(null);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const { alert, showAlert, hideAlert } = useAlert();
   const [loading, setLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState("idle");
 
-  const handleChange = ({ target: { name, value } }) => {
-    setForm({ ...form, [name]: value });
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    if (name === "name" || name === "email" || name === "message") {
+      setForm((currentForm) => ({ ...currentForm, [name]: value }));
+    }
   };
 
   const handleFocus = () => setCurrentAnimation("walk");
   const handleBlur = () => setCurrentAnimation("idle");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
     setCurrentAnimation("hit");
 
@@ -42,28 +47,26 @@ const Contact = () => {
         () => {
           setLoading(false);
           showAlert({
-            show: true,
             text: "Thank you for your message 😃",
             type: "success",
           });
 
           setTimeout(() => {
-            hideAlert(false);
+            hideAlert();
             setCurrentAnimation("idle");
             setForm({
               name: "",
               email: "",
               message: "",
             });
-          }, [3000]);
+          }, 3000);
         },
-        (error) => {
+        (error: Error) => {
           setLoading(false);
           console.error(error);
           setCurrentAnimation("idle");
 
           showAlert({
-            show: true,
             text: "I didn't receive your message 😢",
             type: "danger",
           });
@@ -115,7 +118,7 @@ const Contact = () => {
             Your Message
             <textarea
               name='message'
-              rows='4'
+              rows={4}
               className='textarea'
               placeholder='Write your thoughts here...'
               value={form.message}
