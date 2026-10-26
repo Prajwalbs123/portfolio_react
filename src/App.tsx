@@ -1,30 +1,13 @@
-import { Route, Routes } from "react-router-dom";
-
 import { Footer, Navbar } from "./components";
-import { About, Contact, Home, Project } from "./pages";
+import { Contact, Home } from "./pages";
 
 const App = () => {
   return (
-    <main className='bg-slate-300/20 h-screen'>
-      {/* <Router> */}
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route
-            path='/*'
-            element={
-              <>
-                <Routes>
-                  <Route path='/about' element={<About />} />
-                  <Route path='/projects' element={<Project />} />
-                  <Route path='/contact' element={<Contact />} />
-                </Routes>
-                <Footer />
-              </>
-            }
-          />
-        </Routes>
-      {/* </Router> */}
+    <main>
+      <Navbar />
+      <Home />
+      <Contact />
+      <Footer />
     </main>
   );
 };

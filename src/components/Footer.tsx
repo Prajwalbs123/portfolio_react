@@ -1,27 +1,25 @@
-import { Link } from "react-router-dom";
-
-import { socialLinks } from "../constants";
-
 const Footer = () => {
   return (
-    <footer className='footer font-poppins'>
-      <hr className='border-slate-200' />
-
-      <div className='footer-container'>
-        <p>
-          © 2024 <strong>Prajwal</strong>. All rights reserved.
-        </p>
-
-        <div className='flex gap-3 justify-center items-center'>
-          {socialLinks.map((link) => (
-            <Link key={link.name} to={link.link} target='_blank'>
-              <img
-                src={link.iconUrl}
-                alt={link.name}
-                className='w-6 h-6 object-contain'
-              />
-            </Link>
-          ))}
+    <footer className="site-footer">
+      <div className="site-container flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p>© {new Date().getFullYear()} Prajwal. Built with care.</p>
+        <div className="flex gap-5 font-semibold">
+          <a
+            className="transition-colors hover:text-emerald-800"
+            href="https://github.com/Prajwalbs123"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub ↗
+          </a>
+          <a
+            className="transition-colors hover:text-emerald-800"
+            href="https://www.linkedin.com/in/prajwal-b-s-877a40202"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn ↗
+          </a>
         </div>
       </div>
     </footer>
